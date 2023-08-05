@@ -16,11 +16,15 @@ export default function Home() {
     );
     setTodo("");
   }
-  function removeTodo(id) {
+  function removeTodo(id, newTodo) {
     setTodoList(todoList.filter((element) => element[0] != id));
   };
+
   function modifyTodo(id){
-    setTodoList(todoList[id].replace(to))
+    let element = [todoList[todoList.indexOf[id]], todoList[todoList.indexOf[id] + 1]];
+    setTodoList(todoList.splice(todoList.indexOf(element), 1, [id, newTodo]));
+
+    // setTodoList(todoList.splice(todoList.indexOf(todoList[id]), 1, [id, newTodo]));
   }
 
   function onChange (event) {
@@ -31,7 +35,8 @@ export default function Home() {
     return ( 
       <div>
           <span key={element[0]} onClick={() => modifyTodo}>{element[1]}</span>
-          <button onClick={() => removeTodo(element[0])}> - </button>
+          <button onClick={() => removeTodo(element[0])}> Remove </button>
+          <button onClick={() => modifyTodo(element[0])}> Modify </button>
       </div>
     );
   });
@@ -40,8 +45,8 @@ export default function Home() {
   return (
     <>
       <div>
-        <input type="text" id="todo" placeholder="ToDo ... " value={todo} onChange={onChange}/>
-        <button onClick={addTodo}> + </button>
+        <input type="text" id="todo" placeholder="ToDos ... " value={todo} onChange={onChange}/>
+        <button onClick={addTodo}> Add </button>
         <p>To do list :</p>
         {showTodo}
       </div>
